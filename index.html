@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- variant: typo=medium / image=낮음(placeholder) / color=dominant / radius=round / border=borderless -->
+<!-- variant: typo=medium / image=중간(hero·about 실사진) / color=dominant / radius=round / border=borderless -->
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -24,7 +24,6 @@
       <a href="#about">브랜드</a>
     </nav>
     <div class="nav__right">
-      <a href="#collections" class="btn btn--solid">컬렉션 보기</a>
       <button class="nav__toggle" aria-label="메뉴 열기"><span></span><span></span></button>
     </div>
   </div>
@@ -34,11 +33,8 @@
 
   <!-- Hero — 8-4 -->
   <section class="hero on-brand">
-    <svg class="hero__ripple" viewBox="0 0 200 200" aria-hidden="true">
-      <circle cx="100" cy="100" r="40" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
-      <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-      <circle cx="100" cy="100" r="99" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-    </svg>
+    <img class="hero__photo" src="assets/photos/hero-ripple.jpg" alt="고요한 수면 위로 떨어지는 물방울과 번지는 파문" loading="eager">
+    <div class="hero__scrim" aria-hidden="true"></div>
     <div class="container hero__inner">
       <div class="hero__row">
         <div class="hero__copy" data-reveal>
@@ -46,7 +42,6 @@
           <h1 class="hero__title">하루 끝,<br>물이 흐르는 시간</h1>
           <p class="hero__desc">여울은 데우고, 담그고, 머금고, 흘려보내는 네 번의 순간을 통해 하루의 결을 씻어내는 워터 리추얼 브랜드입니다.</p>
           <div class="hero__actions">
-            <a href="#collections" class="btn btn--solid btn--on-brand">컬렉션 보기</a>
             <a href="#about" class="btn btn--outline btn--on-brand"><span class="btn__dot"></span>브랜드 이야기</a>
           </div>
         </div>
@@ -70,7 +65,7 @@
           <p class="subtle measure" style="margin-top:var(--space-6);">이름 '여울'은 물이 얕고 빠르게 흐르며 맑은 소리를 내는 곳을 뜻하는 순우리말입니다. 우리는 하루 중 가장 지친 순간에, 사람이 다시 맑아질 수 있는 짧은 여울 하나를 놓아두는 일을 합니다.</p>
         </div>
         <div class="about__visual" data-reveal>
-          <div class="img img--4-3" style="border-radius:var(--radius-lg);"></div>
+          <img class="about__photo" src="assets/photos/about-bubbles.jpg" alt="물속에서 떠오르는 공기 방울들">
         </div>
       </div>
     </div>
