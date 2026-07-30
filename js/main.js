@@ -27,9 +27,13 @@
           const delay = el.dataset.staggerDelay;
           if (delay && delay !== '0') {
             el.style.transitionDelay = `${delay}ms`;
-            el.addEventListener('transitionend', () => { el.style.transitionDelay = ''; }, { once: true });
           }
           el.classList.add('is-visible');
+          // 리빌이 끝나면 will-change·delay를 지워 불필요한 레이어 유지를 막는다
+          el.addEventListener('transitionend', () => {
+            el.style.transitionDelay = '';
+            el.style.willChange = 'auto';
+          }, { once: true });
           io.unobserve(el);
         }
       });
@@ -91,6 +95,23 @@
       }
     }, { passive: true });
     update();
+  }
+
+  // 상단 nav — 스크롤 시 투명 → 배경 등장
+  const navEl = document.querySelector('.nav');
+  if (navEl) {
+    let navTicking = false;
+    const updateNav = () => {
+      navEl.classList.toggle('nav--scrolled', window.scrollY > 40);
+      navTicking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!navTicking) {
+        requestAnimationFrame(updateNav);
+        navTicking = true;
+      }
+    }, { passive: true });
+    updateNav();
   }
 
   // 모바일 메뉴 토글
