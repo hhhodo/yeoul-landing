@@ -7,8 +7,8 @@ body{word-break:keep-all;overflow-wrap:break-word;}
 
 :root{
   /* brand — 여울(YEOUL): 깊은 물속에서 가져온 짙은 남색 단일 브랜드 색 */
-  --color-brand:#0F2A4D;
-  --color-brand-600:#00027e;
+  --color-brand:#020451;
+  --color-brand-600:##020451;
   --color-brand-700:#cfd0ff;
   --color-brand-tint:#E8EEF6;
   --color-brand-line:rgba(15,42,77,0.22);
@@ -52,28 +52,27 @@ body{word-break:keep-all;overflow-wrap:break-word;}
 .nav__toggle{display:none;flex-direction:column;gap:5px;padding:var(--space-2);}
 .nav__toggle span{width:22px;height:2px;background:var(--color-brand);display:block;}
 
-/* ---------- hero ---------- */
-.hero{position:relative;overflow:hidden;background:var(--color-brand) center/cover no-repeat;
-  color:var(--text-on-brand);padding-block:var(--space-11) var(--space-9);}
+/* ---------- hero (딤 없음 — 사진 위 어두운 텍스트) ---------- */
+.hero{position:relative;overflow:hidden;background:var(--color-brand-tint) center/cover no-repeat;
+  color:var(--text-default);padding-block:var(--space-11) var(--space-9);}
 .hero__photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-.hero__scrim{position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(15,42,77,.72),rgba(15,42,77,.6) 45%,rgba(15,42,77,.85));}
 .hero__inner{position:relative;z-index:1;}
 .hero__row{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--grid-gutter-lg);align-items:end;}
 .hero__copy{grid-column:1/9;}
-.hero__badge{background:rgba(255,255,255,0.12);color:#fff;}
+.hero__badge{background:rgba(255,255,255,0.82);color:var(--color-brand);}
 .hero__title{font-size:var(--fs-h0);line-height:var(--lh-h0);letter-spacing:var(--display-tracking);
-  font-weight:var(--fw-strong);margin-block:var(--space-5) var(--space-6);max-width:20ch;}
-.hero__desc{font-size:var(--fs-body-1);color:var(--text-on-brand-subtle);max-width:var(--measure);
+  font-weight:var(--fw-strong);margin-block:var(--space-5) var(--space-6);max-width:20ch;
+  color:var(--color-brand);}
+.hero__desc{font-size:var(--fs-body-1);color:var(--text-subtle);max-width:var(--measure);
   margin-bottom:var(--space-7);}
 .hero__actions{display:flex;gap:var(--space-4);flex-wrap:wrap;}
 .hero__stats{grid-column:9/13;display:flex;flex-direction:column;gap:var(--space-5);
-  padding-left:var(--space-6);border-left:1px solid rgba(255,255,255,0.18);}
-.hero__stat b{display:block;font-size:var(--fs-h2);font-weight:var(--fw-strong);}
-.hero__stat span{color:var(--text-on-brand-subtle);}
+  padding-left:var(--space-6);border-left:1px solid rgba(15,42,77,0.22);}
+.hero__stat b{display:block;font-size:var(--fs-h2);font-weight:var(--fw-strong);color:var(--color-brand);}
+.hero__stat span{color:var(--text-subtle);}
 .hero__cue{margin-top:var(--space-10);display:flex;align-items:center;gap:var(--space-3);
-  color:var(--text-on-brand-subtle);font-size:var(--fs-badge);}
-.hero__cue-line{width:1px;height:36px;background:rgba(255,255,255,0.4);
+  color:var(--text-subtle);font-size:var(--fs-badge);}
+.hero__cue-line{width:1px;height:36px;background:rgba(15,42,77,0.4);
   animation:cue-flow 2.4s ease-in-out infinite;}
 @keyframes cue-flow{0%,100%{transform:scaleY(.4);opacity:.4;}50%{transform:scaleY(1);opacity:1;}}
 
