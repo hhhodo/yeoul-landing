@@ -9,7 +9,7 @@ body{word-break:keep-all;overflow-wrap:break-word;}
   /* brand — 여울(YEOUL): 깊은 물속에서 가져온 짙은 남색 단일 브랜드 색 */
   --color-brand:#020451;
   --color-brand-600:#020451;
-  --color-brand-700:#cfd0ff;
+  --color-brand-700:#e7e7ff;
   --color-brand-tint:#E8EEF6;
   --color-brand-line:rgba(15,42,77,0.22);
   --text-on-brand:var(--text-default-inverse);
