@@ -6,23 +6,25 @@
 body{word-break:keep-all;overflow-wrap:break-word;}
 
 :root{
-  /* brand — 여울(YEOUL): 깊은 물속에서 가져온 짙은 남색 단일 브랜드 색 */
-  --color-brand:#020451;
-  --color-brand-600:#020451;
+  /* brand — 여울(YEOUL): 다크 모드 = 블랙 베이스 + 포인트 컬러 블루 */
+  --color-brand:#0A0B10;
+  --color-brand-600:#1B1D24;
   --color-brand-700:#e7e7ff;
   --color-brand-tint:#E8EEF6;
   --color-brand-line:rgba(15,42,77,0.22);
   --text-on-brand:var(--text-default-inverse);
   --text-on-brand-subtle:rgba(255,255,255,0.68);
-  /* 다크 테마(히어로 제외) — 섹션 리듬용 보조 톤 + 강조 포인트 */
-  --color-brand-panel:#131A57;
+  /* 다크 테마(히어로 제외) — 섹션 리듬용 보조 블랙 톤 + 포인트 블루 */
+  --color-brand-panel:#16171D;
   --color-accent-pop:#3E5CFF;
+  --color-accent-pop-600:#2C46D9;
+  --color-accent-tint:rgba(62,92,255,.18);
 }
 
 /* ---------- utility ---------- */
 .eyebrow{display:block;font-size:var(--fs-body-2);font-weight:var(--fw-strong);
   color:var(--color-brand);margin-bottom:var(--space-4);}
-.eyebrow--inverse{color:var(--text-on-brand-subtle);}
+.eyebrow--inverse{color:var(--color-accent-pop);}
 .on-brand{background:var(--color-brand);color:var(--text-on-brand);}
 .on-brand .subtle{color:var(--text-on-brand-subtle);}
 .wash{background:var(--color-brand-panel);color:var(--text-on-brand);}
@@ -33,21 +35,21 @@ body{word-break:keep-all;overflow-wrap:break-word;}
   padding:var(--space-4) var(--space-6);border-radius:var(--radius-circle);
   font-size:var(--fs-body-2);font-weight:var(--fw-strong);white-space:nowrap;
   transition:background-color .2s ease,color .2s ease,border-color .2s ease,opacity .2s ease;}
-.btn--solid{background:var(--color-brand);color:var(--text-on-brand);border:none;}
-.btn--solid:hover{background:var(--color-brand-600);}
+.btn--solid{background:var(--color-accent-pop);color:#fff;border:none;}
+.btn--solid:hover{background:var(--color-accent-pop-600);}
 .btn--solid.btn--on-brand{background:#fff;color:var(--color-brand);}
 .btn--solid.btn--on-brand:hover{background:var(--color-brand-tint);}
 .btn--outline{background:transparent;color:var(--color-brand);border:2px solid var(--color-brand);}
 .btn--outline:hover{background:var(--color-brand);color:var(--text-on-brand);}
-.btn--outline.btn--on-brand{color:#fff;border-color:rgba(255,255,255,0.6);}
-.btn--outline.btn--on-brand:hover{background:#fff;color:var(--color-brand);}
+.btn--outline.btn--on-brand{color:var(--color-accent-pop);border-color:var(--color-accent-pop);}
+.btn--outline.btn--on-brand:hover{background:var(--color-accent-pop);color:#fff;}
 .btn__dot{width:6px;height:6px;border-radius:var(--radius-circle);background:currentColor;flex:none;}
 
 /* ---------- nav (히어로 사진 위에 떠서 시작 — 스크롤 전 투명 → 스크롤 시 배경 등장) ---------- */
 .nav{position:fixed;top:0;left:0;right:0;z-index:40;background:transparent;
   border-bottom:1px solid transparent;
   transition:background-color .35s ease,border-color .35s ease;}
-.nav.nav--scrolled{background:rgba(2,4,20,0.85);
+.nav.nav--scrolled{background:rgba(10,11,16,0.85);
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   border-bottom-color:rgba(255,255,255,0.1);}
 .nav__inner{display:flex;align-items:center;justify-content:space-between;
@@ -107,12 +109,12 @@ body{word-break:keep-all;overflow-wrap:break-word;}
 .process__desc{color:var(--text-on-brand-subtle);max-width:var(--measure);margin-bottom:var(--space-7);}
 
 .ritual{position:relative;width:100%;max-width:440px;aspect-ratio:1/1;margin-inline:auto;}
-.ritual__ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,255,255,0.14);}
+.ritual__ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(62,92,255,0.28);}
 .ritual__ring--in{inset:14%;}
 .ritual__ring--pulse{animation:ritual-pulse 5s ease-in-out infinite;}
 @keyframes ritual-pulse{0%,100%{transform:scale(1);opacity:.5;}50%{transform:scale(1.04);opacity:1;}}
 .ritual__node{position:absolute;width:31%;aspect-ratio:1/1;border-radius:50%;
-  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.22);
+  background:var(--color-accent-tint);border:1px solid rgba(62,92,255,0.4);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;gap:var(--space-1);padding:var(--space-3);}
 .ritual__node b{font-size:var(--fs-body-2);font-weight:var(--fw-strong);}
@@ -122,7 +124,7 @@ body{word-break:keep-all;overflow-wrap:break-word;}
 .ritual__node--3{bottom:0;left:50%;transform:translate(-50%,0);}
 .ritual__node--4{top:50%;left:0;transform:translate(0,-50%);}
 .ritual__core{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:22%;aspect-ratio:1/1;border-radius:50%;background:#fff;color:var(--color-brand);
+  width:22%;aspect-ratio:1/1;border-radius:50%;background:var(--color-accent-pop);color:#fff;
   display:flex;align-items:center;justify-content:center;font-size:var(--fs-badge);font-weight:var(--fw-strong);
   text-align:center;line-height:1.2;}
 
@@ -135,7 +137,7 @@ body{word-break:keep-all;overflow-wrap:break-word;}
   background:var(--color-brand);color:var(--text-on-brand);
   display:flex;flex-direction:column;min-height:340px;}
 .card__icon{width:56px;height:56px;border-radius:var(--radius-circle);
-  background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;
+  background:var(--color-accent-tint);display:flex;align-items:center;justify-content:center;
   margin-bottom:var(--space-7);}
 .card__tag{margin-top:auto;padding-top:var(--space-6);font-size:var(--fs-badge);
   color:var(--text-on-brand-subtle);letter-spacing:.04em;}
@@ -152,7 +154,7 @@ body{word-break:keep-all;overflow-wrap:break-word;}
 .stat-card{grid-column:span 2;background:var(--color-brand-panel);border-radius:var(--radius-md);
   padding:var(--space-6) var(--space-5);display:flex;flex-direction:column;gap:var(--space-2);
   min-height:172px;justify-content:flex-end;}
-.stat-card b{font-size:var(--fs-h2);font-weight:var(--fw-strong);color:#fff;}
+.stat-card b{font-size:var(--fs-h2);font-weight:var(--fw-strong);color:var(--color-accent-pop);}
 .stat-card span{color:var(--text-on-brand-subtle);font-size:var(--fs-body-2);}
 .stat-card--since{grid-column:span 4;background:var(--color-accent-pop);color:var(--text-on-brand);
   align-items:flex-start;justify-content:space-between;}
@@ -179,8 +181,9 @@ body{word-break:keep-all;overflow-wrap:break-word;}
 .stockists__head{max-width:32ch;margin-inline:auto;margin-bottom:var(--space-8);}
 .stockists__grid{grid-template-columns:repeat(6,1fr);}
 .stockist-chip{grid-column:span 2;border-radius:var(--radius-sm);background:var(--color-brand-panel);
-  min-height:96px;display:flex;align-items:center;justify-content:center;
+  border:1px solid transparent;min-height:96px;display:flex;align-items:center;justify-content:center;
   font-weight:var(--fw-strong);color:#fff;letter-spacing:.02em;}
+.stockist-chip:hover{border-color:var(--color-accent-pop);color:var(--color-accent-pop);}
 @media (max-width:768px){.stockists__grid{grid-template-columns:repeat(2,1fr);}.stockist-chip{grid-column:span 1;}}
 
 /* ---------- resources ---------- */
@@ -188,7 +191,7 @@ body{word-break:keep-all;overflow-wrap:break-word;}
 .resources__grid{grid-column:6/13;grid-template-columns:repeat(3,1fr);}
 .res-card{border-radius:var(--radius-md);background:var(--color-brand);
   padding:var(--space-6) var(--space-5);display:flex;flex-direction:column;gap:var(--space-4);min-height:212px;}
-.res-card__icon{width:48px;height:48px;border-radius:var(--radius-circle);background:var(--color-brand-panel);
+.res-card__icon{width:48px;height:48px;border-radius:var(--radius-circle);background:var(--color-accent-pop);
   color:#fff;display:flex;align-items:center;justify-content:center;}
 .res-card h3{font-size:var(--fs-h3);color:var(--text-on-brand);}
 .res-card span{margin-top:auto;color:var(--text-on-brand-subtle);font-size:var(--fs-body-2);}
@@ -245,7 +248,8 @@ body{word-break:keep-all;overflow-wrap:break-word;}
 .hero__photo{transform-origin:center;will-change:transform;}
 
 /* 카드류 호버 — 살짝 커지며 떠오름 (box-shadow 없이 transform만) */
-.collection-card,.res-card,.stockist-chip{transition:transform .3s cubic-bezier(.25,.46,.45,.94);}
+.collection-card,.res-card,.stockist-chip{transition:transform .3s cubic-bezier(.25,.46,.45,.94),
+  border-color .3s ease,color .3s ease;}
 .collection-card:hover,.res-card:hover{transform:translateY(-6px) scale(1.02);}
 .stockist-chip:hover{transform:scale(1.05);}
 
