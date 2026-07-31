@@ -16,8 +16,8 @@ body{word-break:keep-all;overflow-wrap:break-word;}
   --text-on-brand-subtle:rgba(255,255,255,0.68);
   /* 다크 테마(히어로 제외) — 섹션 리듬용 보조 블랙 톤 + 포인트 블루 */
   --color-brand-panel:#16171D;
-  --color-accent-pop:#3E5CFF;
-  --color-accent-pop-600:#2C46D9;
+  --color-accent-pop:#3046c1;
+  --color-accent-pop-600:#3046c1;
   --color-accent-tint:rgba(62,92,255,.18);
 }
 
@@ -46,6 +46,10 @@ body{word-break:keep-all;overflow-wrap:break-word;}
 .btn__dot{width:6px;height:6px;border-radius:var(--radius-circle);background:currentColor;flex:none;}
 
 /* ---------- nav (히어로 사진 위에 떠서 시작 — 스크롤 전 투명 → 스크롤 시 배경 등장) ---------- */
+/* ---------- rain (스크롤 시 등장하는 빗줄기 인터랙션, 히어로 구간엔 숨김) ---------- */
+#rain{position:fixed;inset:0;z-index:5;pointer-events:none;opacity:0;
+  transition:opacity 1.4s ease;}
+
 .nav{position:fixed;top:0;left:0;right:0;z-index:40;background:transparent;
   border-bottom:1px solid transparent;
   transition:background-color .35s ease,border-color .35s ease;}
@@ -94,10 +98,7 @@ body{word-break:keep-all;overflow-wrap:break-word;}
 
 /* ---------- about ---------- */
 .about__row{align-items:center;}
-.about__copy{grid-column:1/6;}
-.about__visual{grid-column:7/13;}
-.about__photo{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;
-  border-radius:var(--radius-lg);display:block;}
+.about__copy{grid-column:1/8;}
 .about__title{max-width:22ch;}
 
 /* ---------- process (리추얼 4단계) ---------- */
@@ -214,7 +215,7 @@ body{word-break:keep-all;overflow-wrap:break-word;}
   color:var(--text-on-brand-subtle);font-size:var(--fs-badge);}
 @media (max-width:1024px){
   .footer__brand,.hero__copy,.about__copy,.process__copy,.journal__head,.mission__copy,.resources__head{grid-column:1/13;}
-  .hero__stats,.about__visual,.process__diagram,.journal__list,.mission__label,.resources__grid{grid-column:1/13;}
+  .hero__stats,.process__diagram,.journal__list,.mission__label,.resources__grid{grid-column:1/13;}
   .footer__col{grid-column:span 6;}
   .footer__social{grid-column:1/13;justify-content:flex-start;margin-top:var(--space-5);}
   .hero__stats{border-left:none;padding-left:0;flex-direction:row;flex-wrap:wrap;margin-top:var(--space-6);}

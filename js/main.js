@@ -97,6 +97,71 @@
     update();
   }
 
+  // 비 내리는 인터랙션 — 히어로를 지나 스크롤하면 서서히 나타남
+  const rainCanvas = document.getElementById('rain');
+  if (rainCanvas && !reduceMotion) {
+    const ctx = rainCanvas.getContext('2d');
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let w = 0, h = 0, drops = [];
+
+    const makeDrop = (randomY) => ({
+      x: Math.random() * w,
+      y: randomY ? Math.random() * h : -20,
+      len: 14 + Math.random() * 18,
+      speed: 4 + Math.random() * 5,
+      drift: -0.6 - Math.random() * 0.4,
+      opacity: 0.12 + Math.random() * 0.28,
+    });
+
+    const resize = () => {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      rainCanvas.width = w * dpr;
+      rainCanvas.height = h * dpr;
+      rainCanvas.style.width = `${w}px`;
+      rainCanvas.style.height = `${h}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.min(160, Math.max(70, Math.round((w * h) / 9000)));
+      drops = Array.from({ length: count }, () => makeDrop(true));
+    };
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      ctx.lineCap = 'round';
+      drops.forEach((d) => {
+        ctx.strokeStyle = `rgba(200,214,255,${d.opacity})`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(d.x, d.y);
+        ctx.lineTo(d.x + d.drift * (d.len * 0.4), d.y - d.len);
+        ctx.stroke();
+        d.y += d.speed;
+        d.x += d.drift;
+        if (d.y - d.len > h) Object.assign(d, makeDrop(false));
+      });
+      requestAnimationFrame(draw);
+    };
+    requestAnimationFrame(draw);
+
+    // 히어로 구간에서는 숨기고, 그 아래로 스크롤하면 서서히 등장
+    let rainTicking = false;
+    const updateRainOpacity = () => {
+      const heroH = heroSection ? heroSection.offsetHeight : window.innerHeight;
+      const progress = Math.min(Math.max((window.scrollY - heroH * 0.5) / (heroH * 0.6), 0), 1);
+      rainCanvas.style.opacity = String(progress * 0.5);
+      rainTicking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!rainTicking) {
+        requestAnimationFrame(updateRainOpacity);
+        rainTicking = true;
+      }
+    }, { passive: true });
+    updateRainOpacity();
+  }
+
   // 상단 nav — 스크롤 시 투명 → 배경 등장
   const navEl = document.querySelector('.nav');
   if (navEl) {
