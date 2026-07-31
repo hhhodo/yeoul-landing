@@ -103,7 +103,7 @@
   if (aboutSection && rainCanvas && !reduceMotion) {
     const ctx = rainCanvas.getContext('2d');
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    let w = 0, h = 0, drops = [];
+    let w = 0, h = 0, drops = [], lanes = 1, laneW = 0;
 
     // 우상 → 좌하 방향 단위벡터(살짝 눕힌 대각선). ux<0(왼쪽), uy>0(아래)
     const DRIFT = 0.5;
@@ -111,10 +111,13 @@
     const ux = -DRIFT / mag;
     const uy = 1 / mag;
 
-    const makeDrop = () => ({
-      x: Math.random() * w,
+    // 방울마다 고정된 "레인(lane)"을 부여해 리스폰될 때도 항상 그 레인 안에서만 되살아나도록 함
+    // → 매번 완전 랜덤으로 좌표를 뽑을 때 생기던 뭉침(클러스터링) 현상을 방지
+    const makeDrop = (lane) => ({
+      lane,
+      x: (lane + Math.random()) * laneW,
       y: Math.random() * h,
-      len: 120 + Math.random() * 160,
+      len: 80 + Math.random() * 107,
       speedMul: 0.4 + Math.random() * 1.1,
       width: 1.6 + Math.random() * 1.4,
       opacity: 0.32 + Math.random() * 0.4,
@@ -122,11 +125,11 @@
 
     // 캔버스 범위를 넉넉히 벗어난 자리에서 다시 시작 — 두 방향 랩어라운드가 서로 덮어쓰지 않도록 else if로 배타 처리
     const respawnFromTopRight = (d) => {
-      d.x = w * (0.7 + Math.random() * 0.3);
+      d.x = (d.lane + Math.random()) * laneW;
       d.y = -d.len - Math.random() * h * 0.3;
     };
     const respawnFromBottomLeft = (d) => {
-      d.x = w * (-0.3 + Math.random() * 0.3);
+      d.x = (d.lane + Math.random()) * laneW;
       d.y = h + d.len + Math.random() * h * 0.3;
     };
 
@@ -139,7 +142,9 @@
       rainCanvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       const count = Math.min(120, Math.max(50, Math.round((w * h) / 9000)));
-      drops = Array.from({ length: count }, makeDrop);
+      lanes = count;
+      laneW = w / lanes;
+      drops = Array.from({ length: count }, (_, i) => makeDrop(i));
       draw();
     };
 
