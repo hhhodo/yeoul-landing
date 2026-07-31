@@ -205,8 +205,8 @@ body{word-break:keep-all;overflow-wrap:break-word;}
 .footer__brand p{color:var(--text-on-brand-subtle);max-width:26ch;}
 .footer__col{grid-column:span 2;}
 @media (min-width:1025px){
-  .footer__col:nth-child(2){grid-column:8/10;}
-  .footer__col:nth-child(3){grid-column:10/13;}
+  .footer__col:nth-child(2){grid-column:8/10;text-align:right;}
+  .footer__col:nth-child(3){grid-column:10/13;text-align:right;}
 }
 .footer__col h4{font-size:var(--fs-body-2);color:var(--text-on-brand-subtle);margin-bottom:var(--space-4);}
 .footer__col a,.footer__col span{display:block;font-size:var(--fs-body-2);margin-bottom:var(--space-3);}
