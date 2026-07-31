@@ -97,7 +97,7 @@
     update();
   }
 
-  // About 섹션 전용 — 시간이 아니라 스크롤한 만큼만 비가 흐름(스크롤을 멈추면 비도 멈춤)
+  // About 섹션 전용 — 스크롤한 만큼만 우상→좌하 대각선으로 비가 흐름(자체 애니메이션 없음)
   const aboutSection = document.getElementById('about');
   const rainCanvas = document.getElementById('about-rain');
   if (aboutSection && rainCanvas && !reduceMotion) {
@@ -105,13 +105,28 @@
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     let w = 0, h = 0, drops = [];
 
+    // 우상 → 좌하 방향 단위벡터(살짝 눕힌 대각선). ux<0(왼쪽), uy>0(아래)
+    const DRIFT = 0.5;
+    const mag = Math.sqrt(DRIFT * DRIFT + 1);
+    const ux = -DRIFT / mag;
+    const uy = 1 / mag;
+
     const makeDrop = () => ({
       x: Math.random() * w,
-      baseY: Math.random() * h,
+      y: Math.random() * h,
       len: 14 + Math.random() * 18,
       speedMul: 0.4 + Math.random() * 1.1,
       opacity: 0.14 + Math.random() * 0.3,
     });
+
+    const respawnFromTopRight = (d) => {
+      d.x = w * (0.85 + Math.random() * 0.5);
+      d.y = -d.len - Math.random() * h * 0.3;
+    };
+    const respawnFromBottomLeft = (d) => {
+      d.x = -Math.random() * w * 0.3;
+      d.y = h + d.len + Math.random() * h * 0.3;
+    };
 
     const resize = () => {
       w = aboutSection.clientWidth;
@@ -130,11 +145,12 @@
       ctx.clearRect(0, 0, w, h);
       ctx.lineCap = 'round';
       drops.forEach((d) => {
+        const halfLen = d.len * 0.5;
         ctx.strokeStyle = `rgba(200,214,255,${d.opacity})`;
         ctx.lineWidth = 1;
         ctx.beginPath();
-        ctx.moveTo(d.x, d.baseY);
-        ctx.lineTo(d.x - d.len * 0.25, d.baseY - d.len);
+        ctx.moveTo(d.x - ux * halfLen, d.y - uy * halfLen); // 꼬리(우상)
+        ctx.lineTo(d.x + ux * halfLen, d.y + uy * halfLen); // 머리(좌하)
         ctx.stroke();
       });
     };
@@ -142,7 +158,7 @@
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
-    // 스크롤 이동량(delta)만큼만 빗줄기가 흐르도록 — 자체 애니메이션 없음
+    // 스크롤 이동량(delta)만큼만 우상→좌하로 흐르도록 — 자체 애니메이션 없음, 위로 스크롤하면 역방향
     let lastScrollY = window.scrollY;
     let rainTicking = false;
     const updateRain = () => {
@@ -150,9 +166,10 @@
       lastScrollY = window.scrollY;
       if (delta !== 0) {
         drops.forEach((d) => {
-          d.baseY += delta * d.speedMul;
-          if (d.baseY - d.len > h) d.baseY = -d.len - Math.random() * 40;
-          if (d.baseY + d.len < 0) d.baseY = h + Math.random() * 40;
+          d.x += ux * delta * d.speedMul;
+          d.y += uy * delta * d.speedMul;
+          if (d.y - d.len > h || d.x < -d.len) respawnFromTopRight(d);
+          if (d.y + d.len < 0 || d.x > w + d.len) respawnFromBottomLeft(d);
         });
         draw();
       }
