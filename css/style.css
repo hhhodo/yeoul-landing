@@ -251,7 +251,6 @@ body{word-break:keep-all;overflow-wrap:break-word;}
 .collection-card,.res-card,.stockist-chip{transition:transform .3s cubic-bezier(.25,.46,.45,.94),
   border-color .3s ease,color .3s ease;}
 .collection-card:hover,.res-card:hover{transform:translateY(-6px) scale(1.02);}
-.stockist-chip:hover{transform:scale(1.05);}
 
 @media (prefers-reduced-motion:reduce){
   [data-reveal]{opacity:1;transform:none;transition:none;}
