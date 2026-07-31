@@ -97,35 +97,34 @@
     update();
   }
 
-  // 비 내리는 인터랙션 — 히어로를 지나 스크롤하면 서서히 나타남
-  const rainCanvas = document.getElementById('rain');
-  if (rainCanvas && !reduceMotion) {
+  // About 섹션 전용 — 시간이 아니라 스크롤한 만큼만 비가 흐름(스크롤을 멈추면 비도 멈춤)
+  const aboutSection = document.getElementById('about');
+  const rainCanvas = document.getElementById('about-rain');
+  if (aboutSection && rainCanvas && !reduceMotion) {
     const ctx = rainCanvas.getContext('2d');
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     let w = 0, h = 0, drops = [];
 
-    const makeDrop = (randomY) => ({
+    const makeDrop = () => ({
       x: Math.random() * w,
-      y: randomY ? Math.random() * h : -20,
+      baseY: Math.random() * h,
       len: 14 + Math.random() * 18,
-      speed: 4 + Math.random() * 5,
-      drift: -0.6 - Math.random() * 0.4,
-      opacity: 0.12 + Math.random() * 0.28,
+      speedMul: 0.4 + Math.random() * 1.1,
+      opacity: 0.14 + Math.random() * 0.3,
     });
 
     const resize = () => {
-      w = window.innerWidth;
-      h = window.innerHeight;
+      w = aboutSection.clientWidth;
+      h = aboutSection.clientHeight;
       rainCanvas.width = w * dpr;
       rainCanvas.height = h * dpr;
       rainCanvas.style.width = `${w}px`;
       rainCanvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.min(160, Math.max(70, Math.round((w * h) / 9000)));
-      drops = Array.from({ length: count }, () => makeDrop(true));
+      const count = Math.min(120, Math.max(50, Math.round((w * h) / 9000)));
+      drops = Array.from({ length: count }, makeDrop);
+      draw();
     };
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
 
     const draw = () => {
       ctx.clearRect(0, 0, w, h);
@@ -134,32 +133,37 @@
         ctx.strokeStyle = `rgba(200,214,255,${d.opacity})`;
         ctx.lineWidth = 1;
         ctx.beginPath();
-        ctx.moveTo(d.x, d.y);
-        ctx.lineTo(d.x + d.drift * (d.len * 0.4), d.y - d.len);
+        ctx.moveTo(d.x, d.baseY);
+        ctx.lineTo(d.x - d.len * 0.25, d.baseY - d.len);
         ctx.stroke();
-        d.y += d.speed;
-        d.x += d.drift;
-        if (d.y - d.len > h) Object.assign(d, makeDrop(false));
       });
-      requestAnimationFrame(draw);
     };
-    requestAnimationFrame(draw);
 
-    // 히어로 구간에서는 숨기고, 그 아래로 스크롤하면 서서히 등장
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    // 스크롤 이동량(delta)만큼만 빗줄기가 흐르도록 — 자체 애니메이션 없음
+    let lastScrollY = window.scrollY;
     let rainTicking = false;
-    const updateRainOpacity = () => {
-      const heroH = heroSection ? heroSection.offsetHeight : window.innerHeight;
-      const progress = Math.min(Math.max((window.scrollY - heroH * 0.5) / (heroH * 0.6), 0), 1);
-      rainCanvas.style.opacity = String(progress * 0.5);
+    const updateRain = () => {
+      const delta = window.scrollY - lastScrollY;
+      lastScrollY = window.scrollY;
+      if (delta !== 0) {
+        drops.forEach((d) => {
+          d.baseY += delta * d.speedMul;
+          if (d.baseY - d.len > h) d.baseY = -d.len - Math.random() * 40;
+          if (d.baseY + d.len < 0) d.baseY = h + Math.random() * 40;
+        });
+        draw();
+      }
       rainTicking = false;
     };
     window.addEventListener('scroll', () => {
       if (!rainTicking) {
-        requestAnimationFrame(updateRainOpacity);
+        requestAnimationFrame(updateRain);
         rainTicking = true;
       }
     }, { passive: true });
-    updateRainOpacity();
   }
 
   // 상단 nav — 스크롤 시 투명 → 배경 등장
