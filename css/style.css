@@ -94,9 +94,7 @@ body{word-break:keep-all;overflow-wrap:break-word;}
 
 /* ---------- about (섹션 내부에만 흐르는 비, 중앙 정렬) ---------- */
 .about{position:relative;overflow:hidden;}
-.about__rain{position:absolute;inset:0;pointer-events:none;opacity:.9;
-  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 18%,#000 82%,transparent 100%);
-  mask-image:linear-gradient(to bottom,transparent 0%,#000 18%,#000 82%,transparent 100%);}
+.about__rain{position:absolute;inset:0;pointer-events:none;opacity:.9;}
 .about__row{align-items:center;position:relative;z-index:1;}
 .about__copy{grid-column:3/11;text-align:center;}
 .about__title{max-width:22ch;margin-inline:auto;}

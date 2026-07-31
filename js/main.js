@@ -114,7 +114,7 @@
     const makeDrop = () => ({
       x: Math.random() * w,
       y: Math.random() * h,
-      len: 46 + Math.random() * 60,
+      len: 120 + Math.random() * 160,
       speedMul: 0.4 + Math.random() * 1.1,
       width: 1.6 + Math.random() * 1.4,
       opacity: 0.32 + Math.random() * 0.4,
