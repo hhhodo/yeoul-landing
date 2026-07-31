@@ -114,18 +114,19 @@
     const makeDrop = () => ({
       x: Math.random() * w,
       y: Math.random() * h,
-      len: 16 + Math.random() * 20,
+      len: 46 + Math.random() * 60,
       speedMul: 0.4 + Math.random() * 1.1,
       width: 1.6 + Math.random() * 1.4,
       opacity: 0.32 + Math.random() * 0.4,
     });
 
+    // 캔버스 범위를 넉넉히 벗어난 자리에서 다시 시작 — 두 방향 랩어라운드가 서로 덮어쓰지 않도록 else if로 배타 처리
     const respawnFromTopRight = (d) => {
-      d.x = w * (0.85 + Math.random() * 0.5);
+      d.x = w * (0.7 + Math.random() * 0.3);
       d.y = -d.len - Math.random() * h * 0.3;
     };
     const respawnFromBottomLeft = (d) => {
-      d.x = -Math.random() * w * 0.3;
+      d.x = w * (-0.3 + Math.random() * 0.3);
       d.y = h + d.len + Math.random() * h * 0.3;
     };
 
@@ -147,11 +148,17 @@
       ctx.lineCap = 'round';
       drops.forEach((d) => {
         const halfLen = d.len * 0.5;
-        ctx.strokeStyle = `rgba(210,222,255,${d.opacity})`;
+        const tailX = d.x - ux * halfLen, tailY = d.y - uy * halfLen; // 꼬리(우상)
+        const headX = d.x + ux * halfLen, headY = d.y + uy * halfLen; // 머리(좌하)
+        const grad = ctx.createLinearGradient(tailX, tailY, headX, headY);
+        grad.addColorStop(0, 'rgba(210,222,255,0)');
+        grad.addColorStop(0.5, `rgba(210,222,255,${d.opacity})`);
+        grad.addColorStop(1, 'rgba(210,222,255,0)');
+        ctx.strokeStyle = grad;
         ctx.lineWidth = d.width;
         ctx.beginPath();
-        ctx.moveTo(d.x - ux * halfLen, d.y - uy * halfLen); // 꼬리(우상)
-        ctx.lineTo(d.x + ux * halfLen, d.y + uy * halfLen); // 머리(좌하)
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(headX, headY);
         ctx.stroke();
       });
     };
@@ -169,8 +176,11 @@
         drops.forEach((d) => {
           d.x += ux * delta * d.speedMul;
           d.y += uy * delta * d.speedMul;
-          if (d.y - d.len > h || d.x < -d.len) respawnFromTopRight(d);
-          if (d.y + d.len < 0 || d.x > w + d.len) respawnFromBottomLeft(d);
+          if (d.y - d.len > h || d.x < -d.len) {
+            respawnFromTopRight(d);
+          } else if (d.y + d.len < 0 || d.x > w + d.len) {
+            respawnFromBottomLeft(d);
+          }
         });
         draw();
       }
