@@ -11,11 +11,11 @@ body{word-break:keep-all;overflow-wrap:break-word;}
   --color-brand-600:#1B1D24;
   --color-brand-700:#e7e7ff;
   --color-brand-tint:#E8EEF6;
-  --color-brand-line:rgba(15,42,77,0.22);
+  --color-brand-line:rgba(78, 103, 120, 0.22);
   --text-on-brand:var(--text-default-inverse);
   --text-on-brand-subtle:rgba(255,255,255,0.68);
   /* 다크 테마(히어로 제외) — 섹션 리듬용 보조 블랙 톤 + 포인트 블루 */
-  --color-brand-panel:#16171D;
+  --color-brand-panel:#2d86b2;
   --color-accent-pop:#85C0DD;
   --color-accent-pop-600:#85C0DD;
   --color-accent-tint:rgba(62,92,255,.18);
