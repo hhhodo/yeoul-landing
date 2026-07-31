@@ -92,10 +92,13 @@ body{word-break:keep-all;overflow-wrap:break-word;}
   animation:cue-flow 2.4s ease-in-out infinite;}
 @keyframes cue-flow{0%,100%{transform:scaleY(.4);opacity:.4;}50%{transform:scaleY(1);opacity:1;}}
 
-/* ---------- about ---------- */
-.about__row{align-items:center;}
-.about__copy{grid-column:1/8;}
-.about__title{max-width:22ch;}
+/* ---------- about (섹션 내부에만 흐르는 비, 중앙 정렬) ---------- */
+.about{position:relative;overflow:hidden;}
+.about__rain{position:absolute;inset:0;pointer-events:none;opacity:.55;}
+.about__row{align-items:center;position:relative;z-index:1;}
+.about__copy{grid-column:3/11;text-align:center;}
+.about__title{max-width:22ch;margin-inline:auto;}
+.about__copy .measure{margin-inline:auto;}
 
 /* ---------- process (리추얼 4단계) ---------- */
 .process{background:var(--color-brand);color:var(--text-on-brand);}
