@@ -13,8 +13,6 @@
 </head>
 <body>
 
-<canvas id="rain" aria-hidden="true"></canvas>
-
 <header class="nav">
   <div class="container nav__inner">
     <a href="#top" class="nav__logo">여울</a>
@@ -56,8 +54,9 @@
     </div>
   </section>
 
-  <!-- About — 5-7 -->
-  <section class="section on-brand" id="about">
+  <!-- About — 중앙 정렬, 섹션 내부에만 흐르는 비 -->
+  <section class="section on-brand about" id="about">
+    <canvas class="about__rain" id="about-rain" aria-hidden="true"></canvas>
     <div class="container">
       <div class="grid about__row">
         <div class="about__copy" data-reveal>
