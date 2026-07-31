@@ -114,9 +114,10 @@
     const makeDrop = () => ({
       x: Math.random() * w,
       y: Math.random() * h,
-      len: 14 + Math.random() * 18,
+      len: 16 + Math.random() * 20,
       speedMul: 0.4 + Math.random() * 1.1,
-      opacity: 0.14 + Math.random() * 0.3,
+      width: 1.6 + Math.random() * 1.4,
+      opacity: 0.32 + Math.random() * 0.4,
     });
 
     const respawnFromTopRight = (d) => {
@@ -146,8 +147,8 @@
       ctx.lineCap = 'round';
       drops.forEach((d) => {
         const halfLen = d.len * 0.5;
-        ctx.strokeStyle = `rgba(200,214,255,${d.opacity})`;
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = `rgba(210,222,255,${d.opacity})`;
+        ctx.lineWidth = d.width;
         ctx.beginPath();
         ctx.moveTo(d.x - ux * halfLen, d.y - uy * halfLen); // 꼬리(우상)
         ctx.lineTo(d.x + ux * halfLen, d.y + uy * halfLen); // 머리(좌하)
