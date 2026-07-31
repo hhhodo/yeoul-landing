@@ -97,7 +97,7 @@
     update();
   }
 
-  // About 섹션 전용 — 스크롤한 만큼만 우상→좌하 대각선으로 비가 흐름(자체 애니메이션 없음)
+  // About 섹션 전용 — 스크롤한 만큼만 수직 아래로 비가 흐름(자체 애니메이션 없음)
   const aboutSection = document.getElementById('about');
   const rainCanvas = document.getElementById('about-rain');
   if (aboutSection && rainCanvas && !reduceMotion) {
@@ -105,8 +105,8 @@
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     let w = 0, h = 0, drops = [], lanes = 1, laneW = 0;
 
-    // 우상 → 좌하 방향 단위벡터(살짝 눕힌 대각선). ux<0(왼쪽), uy>0(아래)
-    const DRIFT = 0.5;
+    // 수직 낙하 단위벡터. DRIFT=0 → ux=0, uy=1(아래로만)
+    const DRIFT = 0;
     const mag = Math.sqrt(DRIFT * DRIFT + 1);
     const ux = -DRIFT / mag;
     const uy = 1 / mag;
@@ -171,7 +171,7 @@
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
-    // 스크롤 이동량(delta)만큼만 우상→좌하로 흐르도록 — 자체 애니메이션 없음, 위로 스크롤하면 역방향
+    // 스크롤 이동량(delta)만큼만 수직으로 흐르도록 — 자체 애니메이션 없음, 위로 스크롤하면 역방향
     let lastScrollY = window.scrollY;
     let rainTicking = false;
     const updateRain = () => {
