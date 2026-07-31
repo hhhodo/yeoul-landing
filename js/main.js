@@ -117,10 +117,10 @@
       lane,
       x: (lane + Math.random()) * laneW,
       y: Math.random() * h,
-      len: 80 + Math.random() * 107,
+      len: 55 + Math.random() * 75,
       speedMul: 0.4 + Math.random() * 1.1,
       width: 1.6 + Math.random() * 1.4,
-      opacity: 0.32 + Math.random() * 0.4,
+      opacity: 0.14 + Math.random() * 0.22,
     });
 
     // 캔버스 범위를 넉넉히 벗어난 자리에서 다시 시작 — 두 방향 랩어라운드가 서로 덮어쓰지 않도록 else if로 배타 처리
