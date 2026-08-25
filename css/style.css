@@ -62,8 +62,9 @@ body{word-break:keep-all;overflow-wrap:break-word;}
 .nav.nav--scrolled .nav__links a{color:var(--text-on-brand-subtle);}
 .nav.nav--scrolled .nav__links a:hover{color:#fff;}
 .nav__right{display:flex;align-items:center;gap:var(--space-5);}
-.nav__toggle{display:none;flex-direction:column;gap:5px;padding:var(--space-2);}
-.nav__toggle span{width:22px;height:2px;background:var(--color-brand);display:block;}
+.nav__toggle{display:none;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;width:40px;height:40px;padding:0;background:none;border:none;cursor:pointer;}
+.nav__toggle span{width:20px;height:2px;border-radius:1px;background:var(--color-brand);display:block;}
 .nav.nav--scrolled .nav__toggle span{background:#fff;}
 
 /* ---------- hero (딤 20% — 사진 위 화이트 텍스트) ---------- */
@@ -189,8 +190,8 @@ body{word-break:keep-all;overflow-wrap:break-word;}
 @media (max-width:768px){.resources__grid{grid-template-columns:repeat(1,1fr);}}
 
 /* ---------- footer ---------- */
-.footer{background:var(--color-brand);color:var(--text-on-brand);padding-block:var(--space-section);}
-.footer__row{align-items:start;margin-bottom:var(--space-9);}
+.footer{background:var(--color-brand);color:var(--text-on-brand);padding-block:var(--space-9);}
+.footer__row{align-items:start;margin-bottom:var(--space-7);}
 .footer__brand{grid-column:1/5;}
 .footer__logo{font-size:var(--fs-h2);font-weight:var(--fw-strong);margin-bottom:var(--space-4);}
 .footer__brand p{color:var(--text-on-brand-subtle);max-width:26ch;}
