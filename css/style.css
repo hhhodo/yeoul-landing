@@ -53,7 +53,7 @@ body{word-break:keep-all;overflow-wrap:break-word;}
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   border-bottom-color:rgba(255,255,255,0.1);}
 .nav__inner{display:flex;align-items:center;justify-content:space-between;
-  min-height:88px;gap:var(--space-6);}
+  min-height:60px;gap:var(--space-6);}
 .nav__logo{font-size:var(--fs-h3);font-weight:var(--fw-strong);letter-spacing:var(--display-tracking);color:var(--color-brand);}
 .nav.nav--scrolled .nav__logo{color:#fff;}
 .nav__links{display:flex;align-items:center;gap:var(--space-7);}
