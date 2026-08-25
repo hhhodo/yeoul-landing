@@ -190,7 +190,7 @@ body{word-break:keep-all;overflow-wrap:break-word;}
 @media (max-width:768px){.resources__grid{grid-template-columns:repeat(1,1fr);}}
 
 /* ---------- footer ---------- */
-.footer{background:var(--color-brand);color:var(--text-on-brand);padding-block:var(--space-9);}
+.footer{background:var(--color-brand);color:var(--text-on-brand);padding-block:var(--space-4);}
 .footer__row{align-items:start;margin-bottom:var(--space-7);}
 .footer__brand{grid-column:1/5;}
 .footer__logo{font-size:var(--fs-h2);font-weight:var(--fw-strong);margin-bottom:var(--space-4);}
