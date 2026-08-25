@@ -16,8 +16,8 @@ body{word-break:keep-all;overflow-wrap:break-word;}
   --text-on-brand-subtle:rgba(255,255,255,0.68);
   /* 다크 테마(히어로 제외) — 섹션 리듬용 보조 블랙 톤 + 포인트 블루 */
   --color-brand-panel:#16171D;
-  --color-accent-pop:#3E5CFF;
-  --color-accent-pop-600:#2C46D9;
+  --color-accent-pop:#85C0DD;
+  --color-accent-pop-600:#85C0DD;
   --color-accent-tint:rgba(62,92,255,.18);
 }
 
